@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 0 284 200" width="284" height="200">
+  <defs>
+    <linearGradient id="crust" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F9C46B"/>
+      <stop offset="1" stop-color="#E0913F"/>
+    </linearGradient>
+    <linearGradient id="tailc" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E7A04C"/>
+      <stop offset="1" stop-color="#D47F2E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 김(갓 구운) -->
+  <g fill="none" stroke="#F3B37A" stroke-width="5" stroke-linecap="round" opacity="0.85">
+    <path d="M112 34 q-8 -10 0 -20 q8 -10 0 -20" transform="translate(0 6)"/>
+    <path d="M140 30 q-8 -10 0 -20 q8 -10 0 -20" transform="translate(0 4)"/>
+    <path d="M168 34 q-8 -10 0 -20 q8 -10 0 -20" transform="translate(0 6)"/>
+  </g>
+
+  <!-- 반짝이 -->
+  <g fill="#FFD54F">
+    <path d="M232 46 l4 10 l10 4 l-10 4 l-4 10 l-4 -10 l-10 -4 l10 -4z"/>
+    <path d="M36 54 l3 7 l7 3 l-7 3 l-3 7 l-3 -7 l-7 -3 l7 -3z"/>
+    <path d="M250 150 l2.5 6 l6 2.5 l-6 2.5 l-2.5 6 l-2.5 -6 l-6 -2.5 l6 -2.5z"/>
+  </g>
+
+  <!-- 그림자 -->
+  <ellipse cx="148" cy="184" rx="92" ry="8" fill="#000" opacity="0.08"/>
+
+  <!-- 꼬리 -->
+  <path d="M200 92 L250 58 C240 92 240 122 252 156 L200 126 Z" fill="url(#tailc)" stroke="#A9601E" stroke-width="5" stroke-linejoin="round"/>
+  <g stroke="#B86A24" stroke-width="3" stroke-linecap="round" opacity="0.6">
+    <path d="M214 98 L238 78"/><path d="M216 109 L240 109"/><path d="M214 120 L238 140"/>
+  </g>
+
+  <!-- 지느러미 -->
+  <path d="M112 58 Q132 30 162 60 Z" fill="#E59A45" stroke="#A9601E" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M120 160 Q136 182 160 158 Z" fill="#E59A45" stroke="#A9601E" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- 입에 문 열쇠: 몸통보다 먼저 그려서 입 안쪽 부분이 가려지게 -->
+  <g transform="rotate(-14 60 128)">
+    <rect x="26" y="123" width="56" height="9" rx="4.5" fill="#FFD54F" stroke="#B88A00" stroke-width="3.5"/>
+    <circle cx="22" cy="127.5" r="15" fill="#FFD54F" stroke="#B88A00" stroke-width="4"/>
+    <circle cx="22" cy="127.5" r="5.5" fill="#FFF7E0" stroke="#B88A00" stroke-width="3"/>
+  </g>
+
+  <!-- 몸통 -->
+  <path d="M62 108 C62 70 104 54 146 58 C172 60 192 74 204 90 L204 128 C192 144 170 156 142 158 C98 162 62 146 62 108 Z"
+        fill="url(#crust)" stroke="#A9601E" stroke-width="5" stroke-linejoin="round"/>
+
+  <!-- 비늘 -->
+  <g fill="none" stroke="#C97A2C" stroke-width="3.5" stroke-linecap="round" opacity="0.55">
+    <path d="M122 88 q9 11 18 0"/><path d="M146 88 q9 11 18 0"/><path d="M170 92 q8 10 16 0"/>
+    <path d="M134 108 q9 11 18 0"/><path d="M158 108 q9 11 18 0"/>
+    <path d="M122 128 q9 11 18 0"/><path d="M146 128 q9 11 18 0"/><path d="M170 124 q8 10 16 0"/>
+  </g>
+
+  <!-- 하이라이트 -->
+  <path d="M84 84 C94 72 112 66 128 66" fill="none" stroke="#FFF1C9" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 얼굴 -->
+  <circle cx="92" cy="98" r="8" fill="#3B2314"/>
+  <circle cx="95" cy="95" r="3" fill="#fff"/>
+  <ellipse cx="96" cy="118" rx="9" ry="5" fill="#F48FB1" opacity="0.75"/>
+  <path d="M67 117 q5 6 12 1" fill="none" stroke="#3B2314" stroke-width="3.5" stroke-linecap="round"/>
+
+</svg>
