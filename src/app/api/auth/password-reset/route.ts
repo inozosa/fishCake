@@ -1,7 +1,7 @@
 import { getSql } from "@/lib/db";
 import { isEmailConfigured, sendEmail } from "@/lib/email";
 import { passwordResetEmail } from "@/lib/emails/password-reset";
-import { getAdminAuth } from "@/lib/firebase-admin";
+import { createPasswordResetLink, isFirebaseAdminConfigured } from "@/lib/firebase-admin";
 import { cleanText, jsonError, readJson } from "@/lib/http";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -18,8 +18,7 @@ export async function POST(req: Request) {
   const email = cleanText(body?.email, 100).toLowerCase();
   if (!EMAIL_RE.test(email)) return jsonError("이메일 형식을 확인해 주세요.");
 
-  const auth = getAdminAuth();
-  if (!auth || !isEmailConfigured()) return jsonError("메일 발송이 아직 설정되지 않았어요.", 503);
+  if (!isFirebaseAdminConfigured() || !isEmailConfigured()) return jsonError("메일 발송이 아직 설정되지 않았어요.", 503);
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "unknown";
   const sql = getSql();
@@ -35,16 +34,10 @@ export async function POST(req: Request) {
     return jsonError("요청이 너무 많아요. 잠시 후 다시 시도해 주세요.", 429);
   }
 
-  // 없는 이메일이면 링크 생성이 '내부 오류'로 실패하므로(Firebase의 가입 여부 숨기기 보호) 먼저 확인한다.
-  try {
-    await auth.getUserByEmail(email);
-  } catch (e) {
-    if ((e as { code?: string }).code === "auth/user-not-found") return Response.json({ ok: true });
-    throw e;
-  }
-
   // 재설정을 마치면 '계속' 버튼으로 우리 로그인 화면에 돌아온다 (Firebase 승인된 도메인이어야 함)
-  const link = new URL(await auth.generatePasswordResetLink(email, { url: `${new URL(req.url).origin}/login` }));
+  const resetLink = await createPasswordResetLink(email, `${new URL(req.url).origin}/login`);
+  if (!resetLink) return Response.json({ ok: true }); // 가입하지 않은 이메일: 보내지 않지만 똑같이 답한다
+  const link = new URL(resetLink);
   link.searchParams.set("lang", "ko"); // Firebase의 새 비밀번호 입력 화면도 한국어로
 
   try {

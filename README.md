@@ -26,7 +26,7 @@
 2. **Authentication → Sign-in method**에서 **이메일/비밀번호**와 **Google**을 사용 설정해요.
 3. **프로젝트 설정 → 내 앱 → 웹 앱 추가**로 나오는 `firebaseConfig`의 `apiKey`, `authDomain`, `projectId`, `appId`를 `.env.local`과 Vercel 환경 변수에 넣어요(`.env.example` 참고).
 4. 배포 도메인은 **Authentication → 설정 → 승인된 도메인**에 추가해요(`localhost`는 기본 포함). 재설정 메일의 '계속' 버튼도 이 목록에 있는 주소로만 돌아올 수 있어요.
-5. 재설정 메일은 Firebase 기본 메일 대신 **우리가 직접 보내요**(이 프로젝트는 Firebase 템플릿 수정이 막혀 있어서). 링크는 Firebase 관리자 SDK가 만들고(`FIREBASE_SERVICE_ACCOUNT_KEY`), 열쇠를 문 붕어빵 그림이 들어간 메일(`src/lib/emails/password-reset.ts`)을 Resend가 보내요(`RESEND_API_KEY`, `EMAIL_FROM`). 같은 이메일은 1시간에 3번, 같은 IP는 20번까지만 보낼 수 있어요. 그림은 Vercel Blob(`fishcake-assets`, 공개)에 있고 원본은 `email-templates/bungeoppang-key.svg`예요.
+5. 재설정 메일은 Firebase 기본 메일 대신 **우리가 직접 보내요**(이 프로젝트는 Firebase 템플릿 수정이 막혀 있어서). 링크는 서비스 계정으로 Firebase REST API를 불러 만들고(`FIREBASE_SERVICE_ACCOUNT_KEY`, `src/lib/firebase-admin.ts`), 열쇠를 문 붕어빵 그림이 들어간 메일(`src/lib/emails/password-reset.ts`)을 Resend가 보내요(`RESEND_API_KEY`, `EMAIL_FROM`). 같은 이메일은 1시간에 3번, 같은 IP는 20번까지만 보낼 수 있어요. 그림은 Vercel Blob(`fishcake-assets`, 공개)에 있고 원본은 `email-templates/bungeoppang-key.svg`예요.
 
 ## 기술 스택
 
